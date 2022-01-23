@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>{{title}}</h1>
+<p>This is a tempalte</p>
+
+{{my_html|safe}}
+
+<p>
+my_number: {{my_number}}<br>
+my_list: {{my_list}}
+</p>
+
+<ul>
+{% for item in my_list %}
+    cycle: {% cycle 1 2 3 %}
+    {% if item == 312 %}
+        <li>{{forloop.counter}} - {{item|add:21}}</li>
+    {% elif item == 'Abc' %}
+        <li>This is not the network</li>
+    {% else %}
+        <li>{{forloop.counter}} - {{item}}</li>
+    {% endif %}
+{% endfor %}
+</ul>
+
+{% endblock content %}
