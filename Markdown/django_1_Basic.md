@@ -314,9 +314,10 @@ python manage.py migrate
 
 
 ### [앱 생성]
-python manage.py startapp pages
-<br>
 
+python manage.py startapp pages
+
+<br>
 
 ### [pages 추가]<br><br>[trydjango\trydjango\settings.py]
 
@@ -326,12 +327,8 @@ INSTALLED_APPS = [
   'products',
 ]
 ```
+
 <br>
-
-
-
-
-
 
 ### [pages home 추가]<br><br>[pages/views.py]
 
@@ -342,8 +339,6 @@ def home_view(*args, **kwargs):
 ```
 
 <br>
-
-
 
 ### [trydjango\trydjango\urls.py]
 
@@ -361,7 +356,6 @@ http://127.0.0.1:8000/
 
 <br>
 
-
 from pages import views -> from pages.views
 
 ```python
@@ -374,10 +368,6 @@ urlpatterns = [
 ```
 
 <br>
-
-
-
-
 
 ### [pages contact 추가하기]<br><br>[pages\views.py]
 
@@ -392,7 +382,6 @@ def contact_view(*args, **kwargs):
 ```
 
 <br>
-
 
 ### [urls.py]
 
@@ -409,10 +398,6 @@ urlpatterns = [
 https://satir.tistory.com/184
 
 <br>
-
-
-
-
 
 ### [pages about, contact 추가]<br><br>[pages\views.py]
 
@@ -433,8 +418,8 @@ def social_view(*args, **kwargs):
     html = "<h1>Social Page</h1>"
     return HttpResponse(html)
 ```
-<br>
 
+<br>
 
 ### [urls.py]
 
@@ -453,7 +438,6 @@ urlpatterns = [
 https://youtu.be/F5mRW0jo-U4?t=4054
 
 <br>
-
 
 ### [args 확인하기]<br><br>[trydjango\pages\views.py]
 
@@ -510,13 +494,7 @@ request: admin, args: (), kwargs: {}
 
 <br><br><br>
 
-
-
-
-
 # Templates
-
-
 
 ### [pages\views.py]
 
@@ -565,17 +543,12 @@ TEMPLATES = [
 
 <br><br><br>
 
-
-
-
-
-
-
-
-
-#### [templates\about.html]  # 생성
-#### [templates\contact.html]  # 생성
 ### [pages\views.py]
+
+templates\about.html  # 생성
+<br>
+templates\contact.html  # 생성
+<br>
 about, contact → render 변경
 
 ```python
@@ -595,10 +568,6 @@ def about_view(request, *args, **kwargs):
 
 <br>
 
-
-
-
-
 ### [templates\home.html]
 django request 객체
 
@@ -610,10 +579,6 @@ django request 객체
 ```
 
 <br><br><br>
-
-
-
-
 
 ### [templates\base.html]
 block, endblock, extends
@@ -713,14 +678,6 @@ block, endblock, extends
 
 <br><br><br>
 
-
-
-
-
-
-
-
-
 ### [navbar]
 ### [templates\base.html]
 content → content_main 변경
@@ -755,10 +712,6 @@ content → content_main 변경
 ```
 
 <br><br><br>
-
-
-
-
 
 ### [templates\base.html]
 block content, content_main
@@ -800,16 +753,9 @@ about에 content_main이 없어서 'content_main!'이 스크립트에 반영됨
 
 <br><br><br>
 
-
-
-
-
-
-
-
-
-#### [navbar.html 생성]
 ### [templates\navbar.html]
+
+navbar.html 생성
 
 ```html
 <nav>
@@ -864,17 +810,7 @@ about에 content_main이 없어서 'content_main!'이 스크립트에 반영됨
 
 <br><br><br>
 
-
-
-
-
-
-
-
-
 # Rendering Context in a Template
-
-
 
 ### [pages\views.py]
 my_context
@@ -954,15 +890,9 @@ my_list: [123, 4242, 12313]
 </p>
 ```
 
-
-
-
-
-
+<br><br><br>
 
 # For Loop in a Template
-
-
 
 ### [templates\about.html]
 
@@ -1004,11 +934,8 @@ forloop.counter
 
 <br><br><br>
 
-
-
-
-
 ### [pages\views.py]
+
 "my_list": [123, 4242, 12313, 'Abc']
 
 ```python
@@ -1036,13 +963,7 @@ def about_view(request, *args, **kwargs):
 
 <br><br><br>
 
-
-
-
-
 # Using Conditions in a Template
-
-
 
 ### [pages\views.py]
 "my_list": [2424, 4231, 312, 'Abc']
@@ -1112,10 +1033,6 @@ elif
 
 <br><br><br>
 
-
-
-
-
 # [Template Tags and Filters](https://docs.djangoproject.com/en/4.0/ref/templates/builtins/)
 
 https://youtu.be/F5mRW0jo-U4?t=6161
@@ -1123,6 +1040,7 @@ https://youtu.be/F5mRW0jo-U4?t=6161
 <br>
 
 ### [templates\about.html]
+
 cycle
 
 ```django
@@ -1155,11 +1073,8 @@ cycle
 
 <br><br><br>
 
-
-
-
-
 ### [pages\views.py]
+
 title
 
 ```python
@@ -1176,6 +1091,7 @@ def about_view(request, *args, **kwargs):
 <br>
 
 ### [templates\about.html]
+
 capfirst
 
 ```django
@@ -1188,7 +1104,6 @@ capfirst
 
 <br>
 
-upper
 upper 쓸 때는 capfirst 없어도 됨
 
 ```django
@@ -1213,11 +1128,8 @@ title
 
 <br><br><br>
 
-
-
-
-
 ### [pages\views.py]
+
 my_html
 
 ```python
@@ -1294,15 +1206,9 @@ hello-world
 
 <br><br><br>
 
-
-
-
-
 ## Render Data from the Database with a Model
 
-
-
-###python mange.py shell
+### python mange.py shell
 
 ```pycon
 >>> Product.objects.all()    
@@ -1319,10 +1225,6 @@ hello-world
 Product(id, title, description, price, summary, featured)
 
 <br><br><br>
-
-
-
-
 
 ### [products\views.py]
 
@@ -1357,6 +1259,7 @@ product에서 detail.html 생성
 <br>
 
 ### [trydjango\urls.py]
+
 urls.urlpatterns - views.product_detail_view(request) - render('product/detail.html')
 
 ```python
@@ -1417,8 +1320,11 @@ urlpatterns = [
 <br>
 
 ### [templates\product\detail.html]
+
 if, else
+<br>
 /admin/products/product/1/change/
+<br>
 product id(1) description = ''
 
 ```django
@@ -1446,6 +1352,7 @@ product id(1) description = ''
 <br>
 
 ### [templates\product\detail.html]
+
 description != None and description != ''
 
 ```django
@@ -1471,10 +1378,6 @@ description != None and description != ''
 ```
 
 <br><br><br>
-
-
-
-
 
 ### [products\views.py]
 
@@ -1521,15 +1424,10 @@ def product_detail_view(request):
 
 <br><br><br>
 
-
-
-
-
 # How Django Templates Load with Apps
 
 https://youtu.be/F5mRW0jo-U4?t=7196
-
-
+<br>
 
 ### [products\templates\products\product_detail.html]
 
@@ -1553,6 +1451,7 @@ templates\product\detail.html 파일 내용 참고하기
 <br>
 
 ### [products\templates\products\product_detail.html]
+
 수정
 
 ```django
@@ -1591,10 +1490,11 @@ product -> products 폴더명은 잘 변경했지만
 해당 html은 products 폴더에 없으므로
 <br>
 render template_name 아규먼트를 'products\product_detail.html' 로 변경해 줘야 함
-<br><br>
+<br><br><br>
 
 
 ### [products\views.py]
+
 'products\product_detail.html'로 변경
 
 ```python
@@ -1622,10 +1522,6 @@ def product_detail_view(request):
 ```
 
 <br><br><br>
-
-
-
-
 
 ### [templates\product\detail.html]
 product -> products 변경
