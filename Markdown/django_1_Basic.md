@@ -1,32 +1,35 @@
-[venv 생성하기]
+###[venv 생성하기]<br>
 conda create --name {이름} python={버전}
+<br>
 conda create --name py38-django python=3.8
+<br><br><br>
 
 
-
-[venv 활성화]
+###[venv 활성화]
 conda activate py38-django
+<br><br><br>
 
 
-
-[django 설치]
+###[django 설치]
 pip install Django
+<br><br><br>
 
 
-
-[빈 프로젝트 만들기]
+###[빈 프로젝트 만들기]
 django-admin startproject [trydjango](https://youtu.be/F5mRW0jo-U4)
+<br>
 현재 위치한 폴더에 직접 프로젝트를 만드는 경우 -> trydjango .
+<br><br><br>
 
 
-
-[디장고 서버 열기]
+###[django 서버 열기]
 cd trydjango
+<br>
 [python manage.py runserver](https://code.visualstudio.com/docs/python/tutorial-django)
+<br><br><br>
 
 
-
-[settings.py]
+###[settings.py]
 
 ```python
 LANGUAGE_CODE = 'ko-kr'
@@ -34,37 +37,33 @@ TIME_ZONE = 'Asia/Seoul'
 USE_I18N = True
 USE_TZ = False
 ```
+<br><br><br>
 
 
-
-[초기 마이그레이션]
+###[초기 마이그레이션]
 [python manage.py migrate]([https://tibetsandfox.tistory.com/24])
 
 - 실제 DB에 변경사항을 적용하는 명령어
 - 마이그레이션을 적용하는 명령어
+  <br><br><br>
 
 
-
-[초기 슈퍼유저 생성]
+###[초기 슈퍼유저 생성]
 python manage.py createsuperuser
-
-
-
-
-
+<br><br><br>
 
 
 # App Products
 
+<br>
 
-
-[App 생성]
+###[App 생성]
 python manage.py startapp products
+<br><br><br>
 
 
-
-[모델 만들기] [docs](https://docs.djangoproject.com/en/2.0/ref/models/fields/#field-types)
-[products/models.py]
+###[모델 만들기] [docs](https://docs.djangoproject.com/en/2.0/ref/models/fields/#field-types)
+###[products/models.py]
 
 ```python
 class Product(models.Model):
@@ -72,10 +71,10 @@ class Product(models.Model):
     description =   models.TextField()
     price =         models.TextField()
 ```
+<br><br><br>
 
 
-
-[trydjango\trydjango\settings.py]
+###[trydjango\trydjango\settings.py]
 
 ```python
 INSTALLED_APPS = [
@@ -84,18 +83,20 @@ INSTALLED_APPS = [
     'products',
 ]
 ```
+<br><br><br>
 
 
-
-[DB 반영]
+###[DB 반영]
 python manage.py makemigrations
+<br>
 python manage.py migrate
 
 > 0001_initial... OK
 
+<br><br><br>
 
 
-[모델 편집]
+###[모델 편집]
 [[products/models.py]](https://youtu.be/F5mRW0jo-U4?t=2407)
 
 ```python
@@ -116,24 +117,26 @@ class Product(models.Model):
 
 
 
-[DB 반영]
+###[DB 반영]
 python manage.py makemigrations
+<br>
 python manage.py migrate
 
 > 0002_product_summary... OK
 
+<br><br><br>
 
 
-[products/admin.py]
+###[products/admin.py]
 
 ```python
 from .models import Product
 admin.site.register(Product)
 ```
+<br><br><br>
 
 
-
-[파이썬 쉘에서 Product objects 생성해보기]
+###[파이썬 쉘에서 Product objects 생성해보기]
 python manage.py shell
 
 ```python
@@ -154,23 +157,26 @@ python manage.py shell
 <QuerySet [<Product: Product object (1)>, <Product: Product object (2)>, <Product: Product object (3)>]>
 ```
 
+<br><br><br>
 
 
-[DB랑 마이그레이션 초기화]
-db.sqlite3
-products/migrations/000*
-{}/{}/\_pycache\_
--> 삭제
+###[DB랑 마이그레이션 초기화]
+- 삭제
+    - db.sqlite3
+    - products/migrations/000*
+    - pycache
 
-
-
+<br>
 python manage.py makemigrations
-{} {} migrate
-{} {} createsuperuser
+<br>
+python manage.py migrate
+<br>
+python manage.py createsuperuser
+<br><br><br>
 
 
 
-[다시 추가]
+###[다시 추가]
 python manage.py shell
 
 ```python
@@ -185,10 +191,10 @@ python manage.py shell
 <QuerySet [<Product: Product object (1)>]>
 ```
 
+<br><br><br>
 
 
-[모델 편집]
-[products/models.py]
+###[모델 편집]<br><br>[products/models.py]
 
 ```python
 class Product(models.Model):
@@ -198,8 +204,7 @@ class Product(models.Model):
     summary =       models.TextField()
     featured =      models.BooleanField()  # null=True, default=True
 ```
-
-
+<br>
 
 python manage.py makemigrations
 
@@ -218,11 +223,11 @@ Migrations for 'products':
   products\migrations\0002_product_featured.py
     - Add field featured to product
 ```
-
+<br>
 
 
 - 마이그레이션 이후 생성된 py
-	products\migrations\0002_product_featured.py
+    - products\migrations\0002_product_featured.py
 
 ```python
 class Migration(migrations.Migration):
@@ -241,16 +246,16 @@ class Migration(migrations.Migration):
     ]
 
 ```
-
+<br>
 
 
 python manage.py migrate
 
 > Applying products.0002_product_featured... OK
 
+<br><br><br>
 
-
-[products\models.py]
+###[products\models.py]
 
 ```python
 class Product(models.Model):
@@ -272,7 +277,7 @@ class Product(models.Model):
 		Running migrations:
 		  Applying products.0003_alter_product_summary... OK
 
-
+<br>
 
 ```
 models.TextField(blank=True, null=True)
@@ -281,9 +286,10 @@ models.TextField(blank=True, null=True)
 blank(True): 필수 항목입니다.
 blank(False):
 
+<br><br><br>
 
 
-[products\models.py]
+###[products\models.py]
 
 ```python
 class Product(models.Model):
@@ -294,28 +300,25 @@ class Product(models.Model):
     featured =      models.BooleanField()
 ```
 
+<br>
+
 python manage.py makemigrations
 python manage.py migrate
 
 >Applying products.0004_alter_product_summary... OK
 
-
-
-
-
-
+<br><br><br>
 
 # App Pages
 
 
 
-[앱 생성]
+###[앱 생성]
 python manage.py startapp pages
+<br>
 
 
-
-[pages 추가]
-[trydjango\trydjango\settings.py]
+###[pages 추가]<br><br>[trydjango\trydjango\settings.py]
 
 ```python
 INSTALLED_APPS = [
@@ -323,15 +326,14 @@ INSTALLED_APPS = [
   'products',
 ]
 ```
+<br>
 
 
 
 
 
 
-
-[pages home 추가]
-[pages/views.py]
+###[pages home 추가]<br><br>[pages/views.py]
 
 ```python
 def home_view(*args, **kwargs):
@@ -339,9 +341,11 @@ def home_view(*args, **kwargs):
     return HttpResponse(html)
 ```
 
+<br>
 
 
-[trydjango\trydjango\urls.py]
+
+###[trydjango\trydjango\urls.py]
 
 ```python
 # ...
@@ -355,6 +359,7 @@ urlpatterns = [
 
 http://127.0.0.1:8000/
 
+<br>
 
 
 from pages import views -> from pages.views
@@ -368,14 +373,13 @@ urlpatterns = [
 ]
 ```
 
+<br>
 
 
 
 
 
-
-[pages contact 추가하기]
-[pages\views.py]
+###[pages contact 추가하기]<br><br>[pages\views.py]
 
 ```python
 def home_view(*args, **kwargs):
@@ -387,9 +391,10 @@ def contact_view(*args, **kwargs):
     return HttpResponse(html)
 ```
 
+<br>
 
 
-[urls.py]
+###[urls.py]
 
 ```python
 from pages.views import home_view, contact_view
@@ -403,14 +408,13 @@ urlpatterns = [
 
 https://satir.tistory.com/184
 
+<br>
 
 
 
 
 
-
-[pages about, contact 추가]
-[pages\views.py]
+###[pages about, contact 추가]<br><br>[pages\views.py]
 
 ```python
 def home_view(*args, **kwargs):
@@ -429,10 +433,10 @@ def social_view(*args, **kwargs):
     html = "<h1>Social Page</h1>"
     return HttpResponse(html)
 ```
+<br>
 
 
-
-[urls.py]
+###[urls.py]
 
 ```python
 from pages.views import home_view, contact_view, about_view
@@ -448,10 +452,10 @@ urlpatterns = [
 
 https://youtu.be/F5mRW0jo-U4?t=4054
 
+<br>
 
 
-[args 확인하기]
-[trydjango\pages\views.py]
+###[args 확인하기]<br><br>[trydjango\pages\views.py]
 
 ```python
 def home_view(*args, **kwargs):
@@ -465,7 +469,7 @@ args: (<WSGIRequest: GET '/'>,), kwargs: {}
 [07:29:49] "GET / HTTP/1.1" 200 20
 ```
 
-
+<br>
 
 ```python
 def home_view(request, *args, **kwargs):
@@ -479,7 +483,7 @@ request: <WSGIRequest: GET '/'>, args: (), kwargs: {}
 [07:30:50] "GET / HTTP/1.1" 200 20
 ```
 
-
+<br>
 
 ```python
 def home_view(request, *args, **kwargs):
@@ -504,7 +508,7 @@ request: admin, args: (), kwargs: {}
 [07:33:22] "GET / HTTP/1.1" 200 20
 ```
 
-
+<br><br><br>
 
 
 
@@ -514,7 +518,7 @@ request: admin, args: (), kwargs: {}
 
 
 
-[pages\views.py]
+###[pages\views.py]
 
 ```python
 def home_view(request, *args, **kwargs):
@@ -524,18 +528,18 @@ def home_view(request, *args, **kwargs):
     return render(request, 'home.html', {})
 ```
 
+<br>
 
-
-[templates\home.html]
+###[templates\home.html]
 
 ```html
 <h1>Hello World</h1>
 <p>This is a tempalte</p>
 ```
 
+<br>
 
-
-[trydjango\settings.py]
+###[trydjango\settings.py]
 
 ```python
 TEMPLATES = [
@@ -559,6 +563,7 @@ TEMPLATES = [
 # [07:34:20] "GET / HTTP/1.1" 200 46
 ```
 
+<br><br><br>
 
 
 
@@ -568,10 +573,9 @@ TEMPLATES = [
 
 
 
-
-[templates\about.html]  # 생성
-[templates\contact.html]  # 생성
-[pages\views.py]
+####[templates\about.html]  # 생성
+####[templates\contact.html]  # 생성
+###[pages\views.py]
 about, contact → render 변경
 
 ```python
@@ -589,13 +593,13 @@ def about_view(request, *args, **kwargs):
 # [07:35:02] "GET /about/ HTTP/1.1" 200 40
 ```
 
+<br>
 
 
 
 
 
-
-[templates\home.html]
+###[templates\home.html]
 django request 객체
 
 ```django
@@ -605,13 +609,13 @@ django request 객체
 <p>This is a tempalte</p>
 ```
 
+<br><br><br>
 
 
 
 
 
-
-[templates\base.html]
+###[templates\base.html]
 block, endblock, extends
 
 ```django
@@ -628,9 +632,9 @@ block, endblock, extends
 </html>
 ```
 
+<br>
 
-
-[templates\home.html]
+###[templates\home.html]
 
 ```django
 {% extends 'base.html' %}
@@ -656,9 +660,9 @@ block, endblock, extends
 </body>
 ```
 
+<br>
 
-
-[templates\about.html]
+###[templates\about.html]
 
 ```django
 {% extends 'base.html' %}
@@ -675,7 +679,7 @@ block, endblock, extends
 </body>
 ```
 
-
+<br>
 
 ```django
 {% extends 'base.html' %}
@@ -695,9 +699,9 @@ block, endblock, extends
 </body>
 ```
 
+<br>
 
-
-[templates\contact.html]
+###[templates\contact.html]
 
 ```django
 {% extends 'base.html' %}
@@ -707,6 +711,7 @@ block, endblock, extends
 {% endblock content %}
 ```
 
+<br><br><br>
 
 
 
@@ -716,9 +721,8 @@ block, endblock, extends
 
 
 
-
-[navbar]
-[templates\base.html]
+###[navbar]
+###[templates\base.html]
 content → content_main 변경
 
 ```django
@@ -736,9 +740,9 @@ content → content_main 변경
 </html>
 ```
 
+<br>
 
-
-[home]
+###[home]
 
 ```django
 <head>
@@ -750,13 +754,13 @@ content → content_main 변경
 </body>
 ```
 
+<br><br><br>
 
 
 
 
 
-
-[templates\base.html]
+###[templates\base.html]
 block content, content_main
 
 ```django
@@ -777,9 +781,9 @@ block content, content_main
 </html>
 ```
 
+<br>
 
-
-[about]
+###[about]
 about에 content_main이 없어서 'content_main!'이 스크립트에 반영됨
 
 ```html
@@ -794,6 +798,7 @@ about에 content_main이 없어서 'content_main!'이 스크립트에 반영됨
 </body>
 ```
 
+<br><br><br>
 
 
 
@@ -803,9 +808,8 @@ about에 content_main이 없어서 'content_main!'이 스크립트에 반영됨
 
 
 
-
-[navbar.html 생성]
-[templates\navbar.html]
+####[navbar.html 생성]
+###[templates\navbar.html]
 
 ```html
 <nav>
@@ -817,9 +821,9 @@ about에 content_main이 없어서 'content_main!'이 스크립트에 반영됨
 </nav>
 ```
 
+<br>
 
-
-[templates\base.html]
+###[templates\base.html]
 
 ```django
 <!doctype html>
@@ -837,9 +841,9 @@ about에 content_main이 없어서 'content_main!'이 스크립트에 반영됨
 </html>
 ```
 
+<br>
 
-
-[about]
+###[about]
 
 ```html
 <head>
@@ -858,7 +862,7 @@ about에 content_main이 없어서 'content_main!'이 스크립트에 반영됨
 </body>
 ```
 
-
+<br><br><br>
 
 
 
@@ -872,7 +876,7 @@ about에 content_main이 없어서 'content_main!'이 스크립트에 반영됨
 
 
 
-[pages\views.py]
+###[pages\views.py]
 my_context
 
 ```python
@@ -884,9 +888,9 @@ def about_view(request, *args, **kwargs):
     return render(request, 'about.html', my_context)
 ```
 
+<br>
 
-
-[templates\about.html]
+###[templates\about.html]
 
 ```django
 {% extends 'base.html' %}
@@ -901,9 +905,9 @@ my_number: {{my_number}}
 {% endblock content %}
 ```
 
+<br>
 
-
-[about body]
+###[about body]
 
 ```html
 <body>
@@ -923,9 +927,9 @@ my_number: 123
 </body>
 ```
 
+<br>
 
-
-[templates\about.html]
+###[templates\about.html]
 my_list
 
 ```python
@@ -938,9 +942,9 @@ def about_view(request, *args, **kwargs):
     return render(request, 'about.html', my_context)
 ```
 
+<br>
 
-
-[about body p]
+###[about body p]
 
 ```
 <p>
@@ -960,7 +964,7 @@ my_list: [123, 4242, 12313]
 
 
 
-[templates\about.html]
+###[templates\about.html]
 
 ```django
 <ul>
@@ -978,6 +982,7 @@ my_list: [123, 4242, 12313]
 </ul>
 ```
 
+<br>
 
 forloop.counter
 
@@ -997,13 +1002,13 @@ forloop.counter
 </ul>
 ```
 
+<br><br><br>
 
 
 
 
 
-
-[pages\views.py]
+###[pages\views.py]
 "my_list": [123, 4242, 12313, 'Abc']
 
 ```python
@@ -1016,7 +1021,7 @@ def about_view(request, *args, **kwargs):
     return render(request, 'about.html', my_context)
 ```
 
-
+<br>
 
 [about]
 
@@ -1029,7 +1034,7 @@ def about_view(request, *args, **kwargs):
 </ul>
 ```
 
-
+<br><br><br>
 
 
 
@@ -1039,7 +1044,7 @@ def about_view(request, *args, **kwargs):
 
 
 
-[pages\views.py]
+###[pages\views.py]
 "my_list": [2424, 4231, 312, 'Abc']
 
 ```python
@@ -1052,9 +1057,9 @@ def about_view(request, *args, **kwargs):
     return render(request, 'about.html', my_context)
 ```
 
+<br>
 
-
-[templates\about.html]
+###[templates\about.html]
 if, else, [add](https://youtu.be/F5mRW0jo-U4?t=6110)
 
 ```django
@@ -1078,6 +1083,7 @@ if, else, [add](https://youtu.be/F5mRW0jo-U4?t=6110)
 </ul>
 ```
 
+<br>
 
 elif
 
@@ -1104,7 +1110,7 @@ elif
 </ul>
 ```
 
-
+<br><br><br>
 
 
 
@@ -1114,9 +1120,9 @@ elif
 
 https://youtu.be/F5mRW0jo-U4?t=6161
 
+<br>
 
-
-[templates\about.html]
+###[templates\about.html]
 cycle
 
 ```django
@@ -1147,13 +1153,13 @@ cycle
 </ul>
 ```
 
+<br><br><br>
 
 
 
 
 
-
-[pages\views.py]
+###[pages\views.py]
 title
 
 ```python
@@ -1167,9 +1173,9 @@ def about_view(request, *args, **kwargs):
     return render(request, 'about.html', my_context)
 ```
 
+<br>
 
-
-[templates\about.html]
+###[templates\about.html]
 capfirst
 
 ```django
@@ -1180,6 +1186,7 @@ capfirst
 <h1>Abc this is about us</h1>
 ```
 
+<br>
 
 upper
 upper 쓸 때는 capfirst 없어도 됨
@@ -1192,6 +1199,7 @@ upper 쓸 때는 capfirst 없어도 됨
 <h1>ABC THIS IS ABOUT US</h1>
 ```
 
+<br>
 
 title
 
@@ -1203,13 +1211,13 @@ title
 <h1>Abc This Is About Us</h1>
 ```
 
+<br><br><br>
 
 
 
 
 
-
-[pages\views.py]
+###[pages\views.py]
 my_html
 
 ```python
@@ -1224,9 +1232,9 @@ def about_view(request, *args, **kwargs):
     return render(request, 'about.html', my_context)
 ```
 
+<br>
 
-
-[templates\about.html]
+###[templates\about.html]
 
 ```django
 {{my_html}}
@@ -1236,6 +1244,7 @@ def about_view(request, *args, **kwargs):
 &lt;h1&gt;Hello World&lt;/h1&gt;
 ```
 
+<br>
 
 safe
 
@@ -1247,6 +1256,7 @@ safe
 <h1>Hello World</h1>
 ```
 
+<br>
 
 striptags
 
@@ -1258,6 +1268,7 @@ striptags
 Hello World
 ```
 
+<br>
 
 slugify
 
@@ -1269,7 +1280,7 @@ slugify
 h1hello-worldh1
 ```
 
-
+<br>
 
 striptags|slugify
 
@@ -1281,7 +1292,7 @@ striptags|slugify
 hello-world
 ```
 
-
+<br><br><br>
 
 
 
@@ -1291,7 +1302,7 @@ hello-world
 
 
 
-python mange.py shell
+###python mange.py shell
 
 ```python
 >>> Product.objects.all()    
@@ -1307,13 +1318,13 @@ python mange.py shell
 
 Product(id, title, description, price, summary, featured)
 
+<br><br><br>
 
 
 
 
 
-
-[products\views.py]
+###[products\views.py]
 
 ```python
 from .models import Product
@@ -1328,10 +1339,12 @@ def product_detail_view(request):
     return render(request, 'product/detail.html', context)
 ```
 
+<br>
 
+###[templates\product\detail.html]
 
-[templates\product\detail.html]
 templates에서 product 폴더 생성
+<br>
 product에서 detail.html 생성
 
 ```django
@@ -1341,9 +1354,9 @@ product에서 detail.html 생성
 {% endblock content %}
 ```
 
+<br>
 
-
-[trydjango\urls.py]
+###[trydjango\urls.py]
 urls.urlpatterns - views.product_detail_view(request) - render('product/detail.html')
 
 ```python
@@ -1358,9 +1371,9 @@ urlpatterns = [
 ]
 ```
 
+<br>
 
-
-[product]
+###[product]
 
 ```html
 <body>
@@ -1375,9 +1388,9 @@ urlpatterns = [
 </body>
 ```
 
+<br>
 
-
-[templates\product\detail.html]
+###[templates\product\detail.html]
 
 ```django
 {% extends 'base.html' %}
@@ -1401,9 +1414,9 @@ urlpatterns = [
 </body>
 ```
 
+<br>
 
-
-[templates\product\detail.html]
+###[templates\product\detail.html]
 if, else
 /admin/products/product/1/change/
 product id(1) description = ''
@@ -1430,9 +1443,9 @@ product id(1) description = ''
 </body>
 ```
 
+<br>
 
-
-[templates\product\detail.html]
+###[templates\product\detail.html]
 description != None and description != ''
 
 ```django
@@ -1457,13 +1470,13 @@ description != None and description != ''
 </body>
 ```
 
+<br><br><br>
 
 
 
 
 
-
-[products\views.py]
+###[products\views.py]
 
 ```python
 def product_detail_view(request):
@@ -1478,9 +1491,9 @@ def product_detail_view(request):
     return render(request, 'product/detail.html', context)
 ```
 
+<br>
 
-
-[templates\product\detail.html]
+###[templates\product\detail.html]
 
 ```django
 {% extends 'base.html' %}
@@ -1506,7 +1519,7 @@ def product_detail_view(request):
 </body>
 ```
 
-
+<br><br><br>
 
 
 
@@ -1518,10 +1531,14 @@ https://youtu.be/F5mRW0jo-U4?t=7196
 
 
 
-[products\templates\products\product_detail.html]
+###[products\templates\products\product_detail.html]
+
 templates 폴더 생성
+<br>
 products 폴더 생성
+<br>
 product_detail.html 생성하고
+<br>
 templates\product\detail.html 파일 내용 참고하기
 
 ```django
@@ -1533,9 +1550,9 @@ templates\product\detail.html 파일 내용 참고하기
 {% endblock content %}
 ```
 
+<br>
 
-
-[products\templates\products\product_detail.html]
+###[products\templates\products\product_detail.html]
 수정
 
 ```django
@@ -1547,9 +1564,9 @@ templates\product\detail.html 파일 내용 참고하기
 {% endblock content %}
 ```
 
+<br>
 
-
-[products\views.py]
+###[products\views.py]
 
 ```python
 def product_detail_view(request):
@@ -1560,9 +1577,9 @@ def product_detail_view(request):
     return render(request, 'products/detail.html', context)
 ```
 
+<br>
 
-
-[오류]
+###[오류]
 
 ```css
 django.template.exceptions.TemplateDoesNotExist: products/detail.html   
@@ -1570,12 +1587,14 @@ django.template.exceptions.TemplateDoesNotExist: products/detail.html
 ```
 
 product -> products 폴더명은 잘 변경했지만
+<br>
 해당 html은 products 폴더에 없으므로
+<br>
 render template_name 아규먼트를 'products\product_detail.html' 로 변경해 줘야 함
+<br><br>
 
 
-
-[products\views.py]
+###[products\views.py]
 'products\product_detail.html'로 변경
 
 ```python
@@ -1602,22 +1621,26 @@ def product_detail_view(request):
 </body>
 ```
 
+<br><br><br>
 
 
 
 
 
-
-[templates\product\detail.html]
+###[templates\product\detail.html]
 product -> products 변경
 detail.html -> product_detail.html 변경
 
+<br>
 
+###[templates\products\product_detail.html]
 
-[templates\products\product_detail.html]
 http://127.0.0.1:8000/product/
+<br>
 products\templates\products\product_detail.html (x)
+<br>
 templates\products\product_detail.html (o)
+<br>
 products\templates\ 보다는 templates\ 폴더가 더 가까워서 그런 것 같음
 
 ```html
@@ -1636,9 +1659,10 @@ products\templates\ 보다는 templates\ 폴더가 더 가까워서 그런 것 �
 ```
 
 templates\products\product_detail.html 삭제
+<br>
 templates\products 삭제
 
-
+<br><br><br>
 
 
 
@@ -1648,7 +1672,7 @@ templates\products 삭제
 
 
 
-[products\forms.py]
+###[products\forms.py]
 
 ```python
 from django import forms
@@ -1664,9 +1688,9 @@ class ProductForm(forms.ModelForm):
         ]
 ```
 
+<br>
 
-
-[products\views.py]
+###[products\views.py]
 
 ```python
 from django.shortcuts import render
@@ -1692,9 +1716,9 @@ def product_detail_view(request):
     return render(request, 'products/product_detail.html', context)
 ```
 
+<br>
 
-
-[products\templates\products\product_create.html]
+###[products\templates\products\product_create.html]
 product_create.html 생성
 
 ```django
@@ -1707,9 +1731,9 @@ product_create.html 생성
 {% endblock content %}
 ```
 
+<br>
 
-
-[trydjango\urls.py]
+###[trydjango\urls.py]
 
 ```python
 from pages.views import home_view, contact_view, about_view
@@ -1725,9 +1749,9 @@ urlpatterns = [
 ]
 ```
 
+<br>
 
-
-[create/]
+###[create/]
 
 ```html
 <form>
@@ -1749,12 +1773,12 @@ urlpatterns = [
 
 http://127.0.0.1:8000/create/?title=New+Product&description=This+is+awesome&price=123.12
 
+<br><br><br>
 
 
 
 
-
-[products\templates\products\product_create.html]
+###[products\templates\products\product_create.html]
 method(post), csrf_token
 
 ```django
@@ -1772,9 +1796,9 @@ django.db.utils.IntegrityError: NOT NULL constraint failed: products_product.fea
 "POST /create/ HTTP/1.1" 500 150857
 ```
 
+<br>
 
-
-[products\models.py]
+###[products\models.py]
 
 ```python
 class Product(models.Model):
@@ -1790,17 +1814,17 @@ python manage.py migrate
 
 >Applying products.0005_alter_product_featured... OK
 
+<br>
 
-
-[127.0.0.1:8000/create/]
+###[127.0.0.1:8000/create/]
 
 ```css
 "POST /create/ HTTP/1.1" 200 928
 ```
 
+<br>
 
-
-[products\views.py]
+###[products\views.py]
 submit 이후에 값이 남아있는 것을
 form = ProductForm() 으로 리셋
 
@@ -1817,17 +1841,14 @@ def product_create_view(request):
     return render(request, 'products/product_create.html', context)
 ```
 
-
+<br><br><br>
 
 
 
 
 
 # Raw HTML Form
-
-
-
-[products\templates\products\product_create.html]
+###[products\templates\products\product_create.html]
 
 ```django
 {% extends 'base.html' %}
@@ -1841,9 +1862,9 @@ def product_create_view(request):
 {% endblock content %}
 ```
 
+<br>
 
-
-[products\views.py]
+###[products\views.py]
 
 ```python
 def product_create_view(request):
@@ -1857,13 +1878,13 @@ Forbidden (CSRF token missing.): /create/
 "POST /create/ HTTP/1.1" 403 2531
 ```
 
+<br><br><br>
 
 
 
 
 
-
-[products\templates\products\product_create.html]
+###[products\templates\products\product_create.html]
 post → get
 
 ```django
@@ -1878,7 +1899,7 @@ post → get
 "GET /create/?title=abc HTTP/1.1" 200 372
 ```
 
-
+<br>
 
 get
 
@@ -1894,7 +1915,7 @@ get
 "GET /create/?title=abc HTTP/1.1" 200 359
 ```
 
-
+<br>
 
 search
 
@@ -1911,7 +1932,7 @@ Not Found: /search/
 "GET /search/?title=abc HTTP/1.1" 404 2653
 ```
 
-
+<br>
 
 google search
 
@@ -1928,7 +1949,7 @@ google search
 
 https://www.google.com/search?q=abc
 
-
+<br>
 
 post, csrf_token
 
@@ -1946,13 +1967,13 @@ post, csrf_token
 
 csrf_token 값이  없을 경우 → "POST /create/ HTTP/1.1" 403
 
+<br><br><br>
 
 
 
 
 
-
-[products\views.py]
+###[products\views.py]
 
 ```python
 def product_create_view(request):
@@ -1962,7 +1983,7 @@ def product_create_view(request):
     return render(request, 'products/product_create.html', context)
 ```
 
-
+<br>
 
 http://127.0.0.1:8000/create/?title=abc
 
@@ -1972,7 +1993,7 @@ http://127.0.0.1:8000/create/?title=abc
 "GET /create/?title=abc HTTP/1.1" 200 506
 ```
 
-
+<br>
 
 http://127.0.0.1:8000/create/
 submit으로 전송
@@ -1983,13 +2004,13 @@ submit으로 전송
 "POST /create/ HTTP/1.1" 200 506
 ```
 
+<br><br><br>
 
 
 
 
 
-
-[products\views.py]
+###[products\views.py]
 
 ```python
 def product_create_view(request):
@@ -2009,7 +2030,8 @@ abc
 "GET /create/?title=abc HTTP/1.1" 200 506
 ```
 
-
+<br>
+'POST'
 
 ```python
 def product_create_view(request):
@@ -2027,7 +2049,7 @@ abc
 "POST /create/ HTTP/1.1" 200 506
 ```
 
-
+<br><br><br>
 
 
 
@@ -2035,9 +2057,7 @@ abc
 
 # Pure Django Form
 
-
-
-[products\views.py]
+###[products\views.py]
 새로 구성된 것을 작성하기 위해서 일부만 남기고 지움
 
 ```python
@@ -2046,10 +2066,11 @@ def product_create_view(request):
     return render(request, 'products/product_create.html', context)
 ```
 
+<br>
 
-
-[products\forms.py]
+###[products\forms.py]
 https://docs.djangoproject.com/en/4.0/ref/forms/fields/
+<br>
 RawProductForm 클래스 추가
 
 ```python
@@ -2071,9 +2092,9 @@ class RawProductForm(forms.Form): # new
     price =         forms.DecimalField()
 ```
 
+<br>
 
-
-[products\views.py]
+###[products\views.py]
 DB에 반영되는 기능이 없기 때문에 submit을 시도해도 에러는 없지만 저장되지 않음
 
 ```python
@@ -2085,9 +2106,9 @@ def product_create_view(request):
     return render(request, 'products/product_create.html', context)
 ```
 
+<br>
 
-
-[products\templates\products\product_create.html]
+###[products\templates\products\product_create.html]
 form.as_p
 
 ```django
@@ -2115,7 +2136,7 @@ form.as_p
 </form>
 ```
 
-
+<br>
 
 form.as_ul
 
@@ -2144,13 +2165,13 @@ form.as_ul
 </form>
 ```
 
+<br><br><br>
 
 
 
 
 
-
-[products\views.py]
+###[products\views.py]
 
 - form method POST
 - RawProductForm(request.POST)
@@ -2168,7 +2189,7 @@ def product_create_view(request):
     return render(request, 'products/product_create.html', context)
 ```
 
-
+<br>
 
 if request.method == 'POST'
 
@@ -2183,7 +2204,7 @@ def product_create_view(request):
     return render(request, 'products/product_create.html', context)
 ```
 
-
+<br>
 
 my_form.cleaned_data
 my_form.errors
@@ -2203,7 +2224,7 @@ def product_create_view(request):
     return render(request, 'products/product_create.html', context)
 ```
 
-
+<br>
 
 submit
 
@@ -2212,7 +2233,7 @@ submit
 "POST /create/ HTTP/1.1" 200 942
 ```
 
-
+<br>
 
 required를 개발자모드로 강제로 제거하고 error(description) 출력함
 
@@ -2221,13 +2242,13 @@ required를 개발자모드로 강제로 제거하고 error(description) 출력�
 "POST /create/ HTTP/1.1" 200 985
 ```
 
+<br><br><br>
 
 
 
 
 
-
-[products\views.py]
+###[products\views.py]
 
 ```python
 def product_create_view(request):
@@ -2250,7 +2271,7 @@ TypeError: create() takes 1 positional argument but 2 were given
 "POST /create/ HTTP/1.1" 500 71954
 ```
 
-
+<br>
 
 **my_form.cleaned_data
 
@@ -2275,7 +2296,7 @@ def product_create_view(request):
 "POST /create/ HTTP/1.1" 200 943
 ```
 
-
+<br><br><br>
 
 
 
@@ -2283,9 +2304,7 @@ def product_create_view(request):
 
 # [Form Widgets](https://youtu.be/F5mRW0jo-U4?t=9375)
 
-
-
-[products\forms.py]
+###[products\forms.py]
 
 ```python
 class RawProductForm(forms.Form):
@@ -2294,16 +2313,16 @@ class RawProductForm(forms.Form):
     price =         forms.DecimalField(initial=199.99)
 ```
 
-![form_widgets_1](.\images\form_widgets_1.PNG)
+![form_widgets_1](./images/form_widgets_1.PNG)
 
 ```css
 {'title': 'title', 'description': '', 'price': Decimal('199.99')}
 "POST /create/ HTTP/1.1" 200 872
 ```
 
+<br>
 
-
-[products\forms.py]
+####[products\forms.py]
 
 ```python
 class RawProductForm(forms.Form):
@@ -2312,11 +2331,11 @@ class RawProductForm(forms.Form):
     price =         forms.DecimalField(initial=199.99)
 ```
 
-![](.\images\form_widgets_2.PNG)
+![](./images/form_widgets_2.PNG)
 
+<br>
 
-
-[products\forms.py]
+####[products\forms.py]
 
 ```python
 class RawProductForm(forms.Form):
@@ -2332,19 +2351,19 @@ class RawProductForm(forms.Form):
     price =         forms.DecimalField(initial=199.99)
 ```
 
-![](.\images\form_widgets_3.PNG)
+![](./images/form_widgets_3.PNG)
 
 ```html
 <textarea name="description" cols="40" rows="20" class="new-class-name two" id="id_description"></textarea>
 ```
 
+<br><br><br>
 
 
 
 
 
-
-[products\forms.py]
+####[products\forms.py]
 
 ```python
 class RawProductForm(forms.Form):
@@ -2361,11 +2380,11 @@ class RawProductForm(forms.Form):
     price =         forms.DecimalField(initial=199.99)
 ```
 
-![](.\images\form_widgets_4.PNG)
+![](./images/form_widgets_4.PNG)
 
+<br>
 
-
-[products\forms.py]
+####[products\forms.py]
 
 ```python
 class RawProductForm(forms.Form):
@@ -2387,9 +2406,9 @@ class RawProductForm(forms.Form):
 <textarea name="description" cols="10" rows="10" class="new-class-name two" id="my-id-for-textareas"></textarea>
 ```
 
+<br>
 
-
-[products\forms.py]
+####[products\forms.py]
 
 ```python
 class RawProductForm(forms.Form):
@@ -2411,11 +2430,11 @@ class RawProductForm(forms.Form):
     price =         forms.DecimalField(initial=199.99)
 ```
 
-![](.\images\form_widgets_5.PNG)
+![](./images/form_widgets_5.PNG)
 
+<br>
 
-
-[products\forms.py]
+####[products\forms.py]
 
 ```python
 class RawProductForm(forms.Form):
@@ -2438,9 +2457,9 @@ class RawProductForm(forms.Form):
     price =         forms.DecimalField(initial=199.99)
 ```
 
-![](.\images\form_widgets_6.PNG)
+![](./images/form_widgets_6.PNG)
 
-
+<br><br><br>
 
 
 
@@ -2448,9 +2467,7 @@ class RawProductForm(forms.Form):
 
 # Form Validation Methods
 
-
-
-[products\forms.py]
+###[products\forms.py]
 
 ```python
 class ProductForm(forms.ModelForm):
@@ -2470,9 +2487,9 @@ class ProductForm(forms.ModelForm):
         ]
 ```
 
+<br>
 
-
-[products\views.py]
+###[products\views.py]
 
 ```python
 def product_create_view(request):
@@ -2489,13 +2506,13 @@ def product_create_view(request):
 # "POST /create/ HTTP/1.1" 200 892
 ```
 
+<br><br><br>
 
 
 
 
 
-
-[products\forms.py]
+###[products\forms.py]
 RawProductForm 참고하기
 
 ```python
@@ -2538,9 +2555,9 @@ class ProductForm(forms.ModelForm):
             raise forms.ValidationError('This is not a valid title!!!')
 ```
 
-![](.\images\FormValidationMethods1.PNG)
+![](./images/FormValidationMethods1.PNG)
 
-
+<br>
 
 ```python
     def clean_title(self, *args, **kwargs):
@@ -2554,9 +2571,9 @@ class ProductForm(forms.ModelForm):
 
 'news', '2022' 문자열을 포함하지 않으면 raise!
 
-![](.\images\FormValidationMethods2.PNG)
+![](./images/FormValidationMethods2.PNG)
 
-
+<br><br><br>
 
 
 
@@ -2613,9 +2630,9 @@ class ProductForm(forms.ModelForm):
         return email
 ```
 
-![](.\images\FormValidationMethods3.PNG)
+![](./images/FormValidationMethods3.PNG)
 
-
+<br><br><br>
 
 
 
@@ -2623,9 +2640,7 @@ class ProductForm(forms.ModelForm):
 
 # Initial Values for Forms
 
-
-
-[products\views.py]
+###[products\views.py]
 
 ```python
 def render_initial_data(request):
@@ -2644,8 +2659,9 @@ def render_initial_data(request):
     return render(request, 'products/product_create.html', context)
 ```
 
+<br>
 
-[trydjango\urls.py]
+###[trydjango\urls.py]
 
 ```python
 from products.views import render_initial_data
@@ -2657,11 +2673,11 @@ urlpatterns = [
 ]
 ```
 
-![](.\images\InitialValuesforForms1.PNG)
+![](./images/InitialValuesforForms1.PNG)
 
+<br>
 
-
-[products\views.py]
+###[products\views.py]
 
 ```python
 def render_initial_data(request):
@@ -2683,11 +2699,11 @@ def render_initial_data(request):
     return render(request, 'products/product_create.html', context)
 ```
 
-![](.\images\InitialValuesforForms2.PNG)
+![](./images/InitialValuesforForms2.PNG)
 
+<br>
 
-
-[products\views.py]
+###[products\views.py]
 
 ```python
 def render_initial_data(request):
@@ -2709,16 +2725,15 @@ def render_initial_data(request):
     return render(request, 'products/product_create.html', context)
 ```
 
-![](.\images\InitialValuesforForms3.PNG)
+![](./images/InitialValuesforForms3.PNG)
+
+<br><br><br>
 
 
 
 
 
-
-
-[Update]
-[products\views.py]
+###[Update]<br><br>[products\views.py]
 
 ```python
 def render_initial_data(request):
@@ -2742,9 +2757,9 @@ def render_initial_data(request):
     return render(request, 'products/product_create.html', context)
 ```
 
+<br>
 
-
-[products\forms.py]
+###[products\forms.py]
 
 ```python
     def clean_title(self, *args, **kwargs):
@@ -2762,17 +2777,19 @@ def render_initial_data(request):
         return email
 ```
 
-
+<br>
 
 submit
-![4](.\images\InitialValuesforForms4-1.PNG)
+<br>
+![4](./images/InitialValuesforForms4-1.PNG)
 
-
+<br>
 
 "POST /initial/ HTTP/1.1" 200 1149
-![4](.\images\InitialValuesforForms4-2.PNG)
+<br>
+![4](./images/InitialValuesforForms4-2.PNG)
 
-
+<br><br><br>
 
 
 
@@ -2780,9 +2797,7 @@ submit
 
 # Dynamic URL Routing
 
-
-
-[products\views.py]
+###[products\views.py]
 (request) → (request, id)
 
 ```python
@@ -2796,10 +2811,10 @@ def dynamic_lookup_view(request, id):
     return render(request, 'products/product_detail.html', context)
 ```
 
+<br>
 
-
-[trydjango\urls.py]
-\<int:id\>
+###[trydjango\urls.py]
+int:id
 
 ```python
 from products.views import dynamic_lookup_view
@@ -2811,9 +2826,9 @@ urlpatterns = [
 # "GET /products/1/ HTTP/1.1" 200 292
 ```
 
-\<int:my_id\> 일 경우, dynamic_lookup_view의 파라미터를 my_id로 변경
+int:my_id 일 경우, dynamic_lookup_view의 파라미터를 my_id로 변경
 
-
+<br><br><br>
 
 
 
@@ -2821,9 +2836,7 @@ urlpatterns = [
 
 # Handle DoesNotExist
 
-
-
-[products\views.py]
+### [products\views.py]
 
 ```python
 from django.shortcuts import render, get_object_or_404
@@ -2843,9 +2856,9 @@ def dynamic_lookup_view(request, my_id):
 변경 후: "GET /products/15/ HTTP/1.1" 404 2326
 ```
 
+<br>
 
-
-[products\views.py]
+###[products\views.py]
 
 ```python
 from django.http import Http404
@@ -2867,7 +2880,7 @@ def dynamic_lookup_view(request, my_id):
 "GET /products/15/ HTTP/1.1" 404 2256
 ```
 
-
+<br><br><br>
 
 
 
@@ -2877,9 +2890,7 @@ def dynamic_lookup_view(request, my_id):
 
 # Delete and Confirm
 
-
-
-[products\views.py]
+###[products\views.py]
 
 ```python
 from django.shortcuts import render, get_object_or_404 ,redirect
@@ -2904,9 +2915,9 @@ def dynamic_lookup_view(request, obj_id):
 
 ```
 
+<br>
 
-
-[products\templates\products\product_delete.html]
+###[products\templates\products\product_delete.html]
 
 ```django
 {% extends 'base.html' %}
@@ -2918,9 +2929,9 @@ def dynamic_lookup_view(request, obj_id):
 {% endblock content %}
 ```
 
+<br>
 
-
-[trydjango\urls.py]
+###[trydjango\urls.py]
 
 ```python
 from products.views import dynamic_lookup_view, product_delete_view
@@ -2940,19 +2951,18 @@ Not Found: /products/1/
 "GET /products/1/ HTTP/1.1" 404 2482
 ```
 
-
+<br><br><br>
 
 
 
 
 
 # View of a List of Database objects
-
 https://youtu.be/F5mRW0jo-U4?t=10703
+<br>
 
 
-
-[products\views.py]
+###[products\views.py]
 
 ```python
 from django.shortcuts import render
@@ -2967,8 +2977,9 @@ def product_list_view(request):
 ```
 
 
+<br>
 
-[products\templates\products\product_list.html]
+###[products\templates\products\product_list.html]
 
 ```django
 {% extends 'base.html' %}
@@ -2982,9 +2993,9 @@ def product_list_view(request):
 {% endblock content %}
 ```
 
+<br>
 
-
-[trydjango\urls.py]
+###[trydjango\urls.py]
 product_list_view
 
 ```python
@@ -2995,9 +3006,9 @@ urlpatterns = [
 ]
 ```
 
-![](.\images\ViewofaListofDatabaseobjects1.PNG)
+![](./images/ViewofaListofDatabaseobjects1.PNG)
 
-
+<br><br><br>
 
 
 
@@ -3005,9 +3016,7 @@ urlpatterns = [
 
 # Dynamic Linking of URLs
 
-
-
-[products\templates\products\product_list.html]
+###[products\templates\products\product_list.html]
 Dynamic Linking - Before
 
 ```django
@@ -3021,15 +3030,15 @@ Dynamic Linking - Before
 {% endblock content %}
 ```
 
-![](.\images\DynamicLinkingofURLs1.PNG)
+![](./images/DynamicLinkingofURLs1.PNG)
+
+<br><br><br>
 
 
 
 
 
-
-
-[pages\models.py]
+###[pages\models.py]
 
 ```python
 class Product(models.Model):
@@ -3043,9 +3052,9 @@ class Product(models.Model):
         return f'/products/{self.id}'
 ```
 
+<br>
 
-
-[products\templates\products\product_list.html]
+###[products\templates\products\product_list.html]
 Dynamic Linking - After
 
 ```django
@@ -3059,17 +3068,11 @@ Dynamic Linking - After
 {% endblock content %}
 ```
 
-
-
-
-
-
+<br><br><br>
 
 # Django URLs Reverse
 
-
-
-[products\models.py]
+###[products\models.py]
 
 ```python
     def get_absolute_url(self):
@@ -3077,10 +3080,11 @@ Dynamic Linking - After
         return reverse('product-detail', kwargs={'obj_id': self.id})
 ```
 
+<br>
 
-
-[trydjango\urls.py]
+###[trydjango\urls.py]
 'products/\<int:obj_id\>/' → 'p/\<int:obj_id\>/'
+<br>
 reverse 하는 김에 route 인자 변경
 
 ```python
@@ -3097,19 +3101,14 @@ urlpatterns = [
 "GET /p/10/ HTTP/1.1" 200 308
 ```
 
-
-
-
-
-
+<br><br><br>
 
 # In App URLs and Namespacing
 
 https://youtu.be/F5mRW0jo-U4?t=10991
+<br>
 
-
-
-[products\views.py]
+###[products\views.py]
 
 ```python
 from django.shortcuts import render, get_object_or_404 ,redirect
@@ -3168,9 +3167,9 @@ def product_delete_view(request, obj_id):
     return render(request, 'products/product_delete.html', context)
 ```
 
+<br>
 
-
-[trydjango\urls.py]
+###[trydjango\urls.py]
 'product-detail' → 'products/\<int:obj_id\>/'
 
 ```python
@@ -3199,9 +3198,9 @@ urlpatterns = [
 ]
 ```
 
+<br>
 
-
-[trydjango\urls.py]
+###[trydjango\urls.py]
 'product-detail' → 'about/\<int:obj_id\>/'
 
 ```python
@@ -3230,18 +3229,9 @@ urlpatterns = [
 ]
 ```
 
+<br><br><br>
 
-
-
-
-
-
-
-
-
-
-[새로운 urls]
-[products\urls.py]
+###[새로운 urls]<br><br>[products\urls.py]
 
 ```python
 from django.urls import path
@@ -3262,9 +3252,9 @@ urlpatterns = [
 ]
 ```
 
+<br>
 
-
-[trydjango\urls.py]
+###[trydjango\urls.py]
 products에 새로운 urls가 생겼으니 메인 urls에 include 할 것
 
 ```python
@@ -3305,6 +3295,7 @@ urlpatterns = [
 ]
 ```
 
+<br>
 
 products urls를 수정해야 함
 
@@ -3314,13 +3305,9 @@ products urls를 수정해야 함
 "GET /products/products/ HTTP/1.1" 200 574
 ```
 
+<br><br><br>
 
-
-
-
-
-
-[products\urls.py]
+###[products\urls.py]
 about?
 
 ```python
@@ -3338,9 +3325,9 @@ urlpatterns = [
 "GET /about/2/ HTTP/1.1" 200 618
 ```
 
+<br>
 
-
-[products\urls.py]
+###[products\urls.py]
 app_name
 
 ```python
@@ -3354,9 +3341,9 @@ urlpatterns = [
 ]
 ```
 
+<br>
 
-
-[products\models.py]
+###[products\models.py]
 'product-detail' → 'products:product-detail'
 
 ```python
@@ -3369,15 +3356,9 @@ urlpatterns = [
 "GET /products/2/ HTTP/1.1" 200 291
 ```
 
-
-
-
-
-
+<br><br><br>
 
 # Class Based Views - ListView
-
-
 
 ```css
 1. Create a New App named Blog
@@ -3407,9 +3388,7 @@ tree
 http://127.0.0.1:8000/admin/blog/article/ (8)
 ```
 
-
-
-
+<br><br><br>
 
 #### 1. Create a New App named Blog
 
@@ -3417,9 +3396,7 @@ http://127.0.0.1:8000/admin/blog/article/ (8)
 \trydjango>python manage.py startapp blog
 ```
 
-
-
-
+<br><br><br>
 
 #### 2. Add 'Blog' to your Django project
 
@@ -3433,13 +3410,11 @@ http://127.0.0.1:8000/admin/blog/article/ (8)
 ...
 ```
 
-
-
-
+<br><br><br>
 
 #### 3. Create a Model named Article
 
-[blog\models.py]
+####[blog\models.py]
 
 ```python
 class Article(models.Model):
@@ -3448,9 +3423,9 @@ class Article(models.Model):
     active = models.BooleanField(default=True)
 ```
 
+<br>
 
-
-[trydjango\settings.py]
+####[trydjango\settings.py]
 
 ```python
 INSTALLED_APPS = [
@@ -3461,7 +3436,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-
+<br><br><br>
 
 
 
@@ -3480,14 +3455,12 @@ Running migrations:
   Applying blog.0001_initial... OK
 ```
 
+<br><br><br>
 
-
-
-
-#### 5. Create a ModelForm for Article
-
-[blog\forms.py]
-fields를 field라고 선언하면 runserver 진행 중에 raise가 일어나니 주의할 것
+#### 5. Create a ModelForm for Article<br><br>[blog\forms.py]
+fields를 field라고 선언하면
+<br>
+runserver 진행 중에 raise가 일어나니 주의할 것
 
 ```python
 from django import forms
@@ -3503,17 +3476,13 @@ class ArticleModelForm(forms.ModelForm):
         ]
 ```
 
-
-
-
+<br><br><br>
 
 #### 6. Create 'article_list.html' & 'article_detail.html' Template
 
 products\templates\products 참고하기
 
-
-
-[blog\templates\articles\article_list.html]
+####[blog\templates\articles\article_list.html]
 
 ```django
 {% extends 'base.html' %}
@@ -3524,9 +3493,9 @@ products\templates\products 참고하기
 {% endblock content %}
 ```
 
+<br>
 
-
-[blog\templates\articles\article_detail.html]
+####[blog\templates\articles\article_detail.html]
 title, content, active
 
 ```django
@@ -3538,9 +3507,7 @@ title, content, active
 {% endblock content %}
 ```
 
-
-
-
+<br><br><br>
 
 #### 7. Add Article Model to the Admin
 
@@ -3552,9 +3519,7 @@ from .models import Article
 admin.site.register(Article)
 ```
 
-
-
-
+<br><br><br>
 
 #### 8. Save a new Article object in the admin
 
@@ -3568,13 +3533,9 @@ http://127.0.0.1:8000/admin/blog/article/
 [09:03:45] "GET /admin/blog/article/ HTTP/1.1" 200 7070
 ```
 
+<br><br><br>
 
-
-
-
-
-
-[blog\views.py]
+####[blog\views.py]
 ArticleListView 객체만 만들고 urls.py 편집하기
 
 ```python
@@ -3595,9 +3556,9 @@ class ArticleListView(ListView):
     queryset = Article.objects.all()
 ```
 
+<br>
 
-
-[blog\urls.py]
+####[blog\urls.py]
 
 ```python
 from django.urls import path
@@ -3611,9 +3572,9 @@ urlpatterns = [
 ]
 ```
 
+<br>
 
-
-[trydjango\urls.py]
+####[trydjango\urls.py]
 include('blog.urls')
 
 ```python
@@ -3633,13 +3594,9 @@ django.template.exceptions.TemplateDoesNotExist: blog/article_list.html
 "GET /blog/ HTTP/1.1" 500 81061
 ```
 
+<br><br><br>
 
-
-
-
-
-
-[blog\views.py]
+####[blog\views.py]
 
 ```python
 class ArticleListView(ListView):
@@ -3651,17 +3608,11 @@ class ArticleListView(ListView):
 "GET /blog/ HTTP/1.1" 200 286
 ```
 
-
-
-
-
-
+<br><br><br><br><br><br>
 
 # Class Based Views - DetailView
 
-
-
-[blog\views.py]
+###[blog\views.py]
 클래스 이름, 상속 클래스, 템플렛 이름만 변경하고 urls.py로 이동하기
 
 ```python
@@ -3674,9 +3625,9 @@ class ArticleDetailView(DetailView):
     queryset = Article.objects.all()
 ```
 
+<br>
 
-
-[blog\urls.py]
+###[blog\urls.py]
 
 ```python
 from .views import (
@@ -3697,9 +3648,9 @@ urlpatterns = [
 ]
 ```
 
+<br>
 
-
-[blog\templates\articles\article_detail.html]
+###[blog\templates\articles\article_detail.html]
 html 다시 확인하기
 
 ```django
@@ -3716,9 +3667,9 @@ html 다시 확인하기
 "GET /blog/1/ HTTP/1.1" 200 289
 ```
 
+<br>
 
-
-[blog\views.py]
+###[blog\views.py]
 template_name 주석처리하고 접속해보기
 
 ```python
@@ -3732,9 +3683,9 @@ django.template.exceptions.TemplateDoesNotExist: blog/article_detail.html
 "GET /blog/1/ HTTP/1.1" 500 81132
 ```
 
+<br>
 
-
-[blog\urls.py]
+###[blog\urls.py]
 int:pk → int:id
 
 ```python
@@ -3763,9 +3714,9 @@ class Article(models.Model):
     active = models.BooleanField(default=True)
 ```
 
+<br>
 
-
-[blog\urls.py]
+###[blog\urls.py]
 int:slug
 
 ```python
@@ -3781,13 +3732,9 @@ django.core.exceptions.FieldError: Cannot resolve keyword 'slug' into field. Cho
 "GET /blog/1/ HTTP/1.1" 500 119365
 ```
 
+<br><br><br>
 
-
-
-
-
-
-[blog\urls.py]
+###[blog\urls.py]
 int:pk
 
 ```python
@@ -3797,9 +3744,9 @@ urlpatterns = [
 ]
 ```
 
+<br>
 
-
-[blog\views.py]
+###[blog\views.py]
 
 ```python
 class ArticleDetailView(DetailView):
@@ -3818,17 +3765,11 @@ Not Found: /blog/2/
 "GET /blog/2/ HTTP/1.1" 404 2566, No Article matches the given query.
 ```
 
-
-
-
-
-
+<br><br><br>
 
 # Class Based Views - CreateView
 
-
-
-[blog\views.py]
+###[blog\views.py]
 클래스 이름. 상속 클래스. 템플렛 이름만 변경하고 html, urls 작성하기
 
 ```python
@@ -3839,9 +3780,9 @@ class ArticleCreateView(CreateView):
     template_name = 'articles/article_create.html'
 ```
 
+<br>
 
-
-[blog\templates\articles\article_create.html]
+###[blog\templates\articles\article_create.html]
 참조: products\templates\products\product_create.html
 
 ```django
@@ -3856,9 +3797,9 @@ class ArticleCreateView(CreateView):
 {% endblock content %}
 ```
 
+<br>
 
-
-[blog\urls.py]
+###[blog\urls.py]
 
 ```python
 from .views import (
@@ -3885,9 +3826,9 @@ django.core.exceptions.ImproperlyConfigured: Using ModelFormMixin (base class of
 [22/Jan/2022 07:31:05] "GET /blog/create/ HTTP/1.1" 500 92956
 ```
 
+<br>
 
-
-[blog\views.py]
+###[blog\views.py]
 
 ```python
 class ArticleCreateView(CreateView):
@@ -3899,7 +3840,7 @@ class ArticleCreateView(CreateView):
 "GET /blog/create/ HTTP/1.1" 200 890
 ```
 
-
+<br>
 
 ```python
 class ArticleCreateView(CreateView):
@@ -3916,9 +3857,9 @@ django.core.exceptions.ImproperlyConfigured: No URL to redirect to.  Either prov
 "POST /blog/create/ HTTP/1.1" 500 102766
 ```
 
+<br>
 
-
-[blog\models.py]
+###[blog\models.py]
 
 ```python
     def get_absolute_url(self):
@@ -3933,17 +3874,11 @@ django.core.exceptions.ImproperlyConfigured: No URL to redirect to.  Either prov
 "GET /blog/3/ HTTP/1.1" 200 280
 ```
 
-
-
-
-
-
+<br><br><br>
 
 # UpdateView
 
-
-
-[blog\views.py]
+###[blog\views.py]
 
 ```python
 class ArticleUpdateView(UpdateView):
@@ -3959,9 +3894,9 @@ class ArticleUpdateView(UpdateView):
         return get_object_or_404(Article, id=obj_id)
 ```
 
+<br>
 
-
-[blog\urls.py]
+###[blog\urls.py]
 
 ```python
 from .views import (
@@ -3991,17 +3926,11 @@ urlpatterns = [
 "GET /blog/3/ HTTP/1.1" 200 280
 ```
 
-
-
-
-
-
+<br><br><br>
 
 # DeleteView
 
-
-
-[blog\views.py]
+###[blog\views.py]
 get_success_url 없을 때: [500 Internal Server Error](https://developer.mozilla.org/ko/docs/Web/HTTP/Status/500)
 
 ```python
@@ -4013,9 +3942,9 @@ class ArticleDeleteView(DeleteView):
         return get_object_or_404(Article, id=obj_id)
 ```
 
+<br>
 
-
-[blog\urls.py]
+###[blog\urls.py]
 
 ```python
 from .views import (
@@ -4045,13 +3974,9 @@ django.core.exceptions.ImproperlyConfigured: No URL to redirect to. Provide a su
 "POST /blog/2/delete/ HTTP/1.1" 500 85028
 ```
 
+<br><br><br>
 
-
-
-
-
-
-[blog\views.py]
+###[blog\views.py]
 get_success_url 있을 때: [200 OK](https://developer.mozilla.org/ko/docs/Web/HTTP/Status/200)
 
 ```python
@@ -4075,3 +4000,4 @@ class ArticleDeleteView(DeleteView):
 "GET /blog/ HTTP/1.1" 200 332
 ```
 
+<br><br><br>

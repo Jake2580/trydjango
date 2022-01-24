@@ -1,16 +1,14 @@
 # Function Based View to Class Based View
 
-
-
 ```cmd
 trydjango>python manage.py startapp courses
 trydjango>dir courses
 <DIR>    courses
 ```
 
+<br>
 
-
-[courses\views.py]
+###[courses\views.py]
 Function Based View
 
 ```python
@@ -21,9 +19,9 @@ def my_fbv(request, *args, **kwargs):
     return render(request, 'about.html', {})
 ```
 
+<br>
 
-
-[courses\urls.py]
+###[courses\urls.py]
 생성
 
 ```python
@@ -36,9 +34,9 @@ urlpatterns = [
 ]
 ```
 
+<br>
 
-
-[trydjango\settings.py]
+###[trydjango\settings.py]
 
 ```python
 urlpatterns = [
@@ -54,13 +52,11 @@ urlpatterns = [
 "GET /courses/ HTTP/1.1" 200 327
 ```
 
-
+<br><br><br>
 
 ---
 
-
-
-[courses\views.py]
+###[courses\views.py]
 Class Based View
 
 ```python
@@ -76,9 +72,9 @@ class CourseView(View):
 #     return render(request, 'about.html', {})
 ```
 
+<br>
 
-
-[courses\urls.py]
+###[courses\urls.py]
 CourseView
 
 ```python
@@ -99,13 +95,11 @@ AttributeError: 'CourseView' object has no attribute 'META'
 "GET /courses/ HTTP/1.1" 500 104878
 ```
 
-
+<br><br><br>
 
 ---
 
-
-
-[courses\views.py]
+###[courses\views.py]
 get(request, ...) → get(self, request, ...)
 
 ```python
@@ -122,13 +116,11 @@ class CourseView(View):
 "GET /courses/ HTTP/1.1" 200 327
 ```
 
-
+<br><br><br>
 
 ---
 
-
-
-[courses\views.py]
+###[courses\views.py]
 self.template_name
 
 ```python
@@ -143,9 +135,9 @@ class CourseView(View):
     #     return render(request, 'about.html', {})
 ```
 
+<br>
 
-
-[courses\urls.py]
+###[courses\urls.py]
 as_view(template_name='contact.html')
 
 ```python
@@ -174,17 +166,14 @@ urlpatterns = [
 </body>
 ```
 
-
-
-
-
-
+<br><br><br>
 
 # Raw Detail Class Based View
 
 https://youtu.be/F5mRW0jo-U4?t=12437
+<br>
 
-[courses\models.py]
+###[courses\models.py]
 Course Model
 
 ```python
@@ -195,9 +184,9 @@ class Course(models.Model):
     title = models.CharField(max_length=120)
 ```
 
+<br>
 
-
-[trydjango\settings.py]
+###[trydjango\settings.py]
 이 파일의 INSTALLED_APPS에 작성을 해줘야 500 에러가 발생하지 않음
 
 - 예시) INSTALLED_APPS에 작성하지 않았을 때
@@ -214,6 +203,7 @@ INSTALLED_APPS = [
 ]
 ```
 
+<br>
 
 INSTALLED_APPS 작성 후, 마이그레이션 진행하기
 
@@ -228,13 +218,11 @@ INSTALLED_APPS 작성 후, 마이그레이션 진행하기
 > Running migrations:
 >   Applying courses.0001_initial... OK
 
-
+<br><br><br>
 
 ---
 
-
-
-[courses\views.py]
+###[courses\views.py]
 변경사항 없음
 
 ```python
@@ -248,9 +236,9 @@ class CourseView(View):  # CourseDetailView
     #     return render(request, 'about.html', {})
 ```
 
+<br>
 
-
-[courses\urls.py]
+###[courses\urls.py]
 int:id, name='courses-detail'
 
 ```python
@@ -263,9 +251,9 @@ urlpatterns = [
 ]
 ```
 
+<br>
 
-
-[courses\views.py]
+###[courses\views.py]
 template_name 수정
 get 메소드에 id 파라미터 추가
 
@@ -277,15 +265,15 @@ class CourseView(View):
         return render(request, self.template_name, {})
 ```
 
+<br>
 
-
-[courses\templates\courses\courses_detail.html]
+###[courses\templates\courses\courses_detail.html]
 
 - \templates\courses 폴더 생성
 - courses_detail.html 파일 생성
 	- blog\templates\articles\article_detail.html 참고하기
 
-
+<br>
 
 blog\templates\articles\article_detail.html
 
@@ -298,7 +286,7 @@ blog\templates\articles\article_detail.html
 {% endblock content %}
 ```
 
-
+<br>
 
 courses_detail.html
 
@@ -313,13 +301,11 @@ courses_detail.html
 "GET /courses/1/ HTTP/1.1" 200 248
 ```
 
-
+<br>
 
 ---
 
-
-
-[courses\views.py]
+###[courses\views.py]
 Course Model
 
 ```python
@@ -339,7 +325,7 @@ class CourseView(View):
         return render(request, self.template_name, context)
 ```
 
-
+<br>
 
 python manage.py shell
 
@@ -369,13 +355,11 @@ Not Found: /courses/3/
 "GET /courses/3/ HTTP/1.1" 404 2575
 ```
 
-
+<br><br><br>
 
 ---
 
-
-
-[courses\templates\courses\course_detail.html]
+###[courses\templates\courses\course_detail.html]
 
 ```django
 {% extends 'base.html' %}
@@ -384,6 +368,7 @@ Not Found: /courses/3/
 {% endblock content %}
 ```
 
+<br>
 
 "GET /courses/1/ HTTP/1.1" 200 263
 
@@ -391,17 +376,11 @@ Not Found: /courses/3/
 <h1>1 - Hello World</h1>
 ```
 
-
-
-
-
-
+<br><br><br>
 
 # Raw List Class Based View
 
-
-
-[courses\views.py]
+###[courses\views.py]
 CourseListView
 
 ```python
@@ -415,9 +394,9 @@ class CourseListView(View):
 
 ```
 
+<br>
 
-
-[courses\urls.py]
+###[courses\urls.py]
 CourseListView
 
 ```python
@@ -435,9 +414,9 @@ urlpatterns = [
 ]
 ```
 
+<br>
 
-
-[courses\templates\courses\course_list.html]
+###[courses\templates\courses\course_list.html]
 products\templates\products\product_list.html 참고하기
 
 ```django
@@ -469,14 +448,13 @@ products\templates\products\product_list.html 참고하기
 </body>
 ```
 
-
+<br><br><br>
 
 ---
 
-
-
-[courses\views.py]
+###[courses\views.py]
 CourseListView get_queryset 메소드 선언
+<br>
 object_list: self.queryset → self.get_queryset()
 
 ```python
@@ -496,13 +474,11 @@ class CourseListView(View):
 "GET /courses/ HTTP/1.1" 200 269
 ```
 
-
+<br><br><br>
 
 ---
 
-
-
-[courses\views.py]
+###[courses\views.py]
 CourseListView를 상속받은 MyListView 클래스 선언
 
 ```python
@@ -522,9 +498,9 @@ class MyListView(CourseListView):
     pass
 ```
 
+<br>
 
-
-[courses\urls.py]
+###[courses\urls.py]
 
 ```python
 from .views import (
@@ -563,22 +539,17 @@ urlpatterns = [
 ```
 
 확인이 끝났다면 views.py, urls.py에서
+<br>
 CourseListView 클래스가 영향을 받지 않도록
+<br>
 MyListView 클래스 변경하기
-
+<br><br>
 ex) 주석, 삭제
-
-
-
-
-
-
+<br><br><br>
 
 # Raw Create Class Based View
 
-
-
-[courses\forms.py]
+###[courses\forms.py]
 forms.py 파일 생성 후 작성
 
 ```python
@@ -593,9 +564,9 @@ class CourseModelForm(forms.ModelForm):
         ]
 ```
 
+<br>
 
-
-[courses\views.py]
+###[courses\views.py]
 CourseCreateView 클래스 선언
 
 ```python
@@ -614,9 +585,9 @@ class CourseCreateView(View):
         return render(request, self.template_name, context)
 ```
 
+<br>
 
-
-[courses\urls.py]
+###[courses\urls.py]
 CourseCreateView 추가
 
 ```python
@@ -636,7 +607,7 @@ urlpatterns = [
 ]
 ```
 
-
+<br>
 
 course_create.html가 없음
 
@@ -645,9 +616,9 @@ django.template.exceptions.TemplateDoesNotExist: courses/course_create.html
 "GET /courses/create/ HTTP/1.1" 500 92634
 ```
 
+<br>
 
-
-[courses\templates\courses\course_create.html]
+###[courses\templates\courses\course_create.html]
 blog\templates\articles\article_create.html 참고하기
 
 ```django
@@ -671,21 +642,19 @@ blog\templates\articles\article_create.html 참고하기
 "GET /courses/create/ HTTP/1.1" 200 596
 ```
 
-![](.\images\ViewofaListofDatabaseobjects1.PNG)
+![](./images/ViewofaListofDatabaseobjects1.PNG)
 
 ```css
 "POST /courses/create/ HTTP/1.1" 200 447
 ```
 
-![](.\images\ViewofaListofDatabaseobjects2.PNG)
+![](./images/ViewofaListofDatabaseobjects2.PNG)
 
-
+<br><br><br>
 
 ---
 
-
-
-[courses\views.py]
+###[courses\views.py]
 
 ```python
     def get(self, request, *args, **kwargs):
@@ -709,17 +678,11 @@ blog\templates\articles\article_create.html 참고하기
 "GET /courses/3/ HTTP/1.1" 200 266
 ```
 
-
-
-
-
-
+<br><br><br>
 
 # Raw Validation on a Post Method
 
-
-
-[courses\forms.py]
+###[courses\forms.py]
 
 ```python
 class CourseModelForm(forms.ModelForm):
@@ -747,17 +710,11 @@ class CourseModelForm(forms.ModelForm):
 </form>
 ```
 
-
-
-
-
-
+<br><br><br>
 
 # Raw Update Class Based View
 
-
-
-[courses\views.py]
+###[courses\views.py]
 CourseUpdateView 클래스 선언
 
 ```python
@@ -811,9 +768,9 @@ class CourseUpdateView(View):
         return render(request, self.template_name, context)
 ```
 
+<br>
 
-
-[courses\urls.py]
+###[courses\urls.py]
 
 ```python
 from .views import (
@@ -838,9 +795,9 @@ django.template.exceptions.TemplateDoesNotExist: courses/course_update.html
 "GET /courses/1/update/ HTTP/1.1" 500 93188
 ```
 
+<br>
 
-
-[courses\templates\courses\course_update.html]
+###[courses\templates\courses\course_update.html]
 courses\templates\courses\course_create.html 참고하기
 
 ```django
@@ -867,17 +824,11 @@ Not Found: /courses/5/update/
 "GET /courses/5/update/ HTTP/1.1" 404 2987
 ```
 
-
-
-
-
-
+<br><br><br>
 
 # Raw Delete Class Based View
 
-
-
-[courses\views.py]
+###[courses\views.py]
 from django.shortcuts import redirect
 
 ```python
@@ -916,9 +867,9 @@ class CourseDeleteView(View):
         return render(request, self.template_name, context)
 ```
 
+<br>
 
-
-[courses\urls.py]
+###[courses\urls.py]
 
 ```python
 from .views import (
@@ -941,9 +892,9 @@ urlpatterns = [
 ]
 ```
 
+<br>
 
-
-[courses\templates\courses\course_delete.html]
+###[courses\templates\courses\course_delete.html]
 blog\templates\articles\article_delete.html 참고하기
 
 ```python
@@ -971,17 +922,11 @@ Not Found: /courses/2/
 "GET /courses/2/ HTTP/1.1" 404 2760
 ```
 
-
-
-
-
-
+<br><br><br>
 
 # Custom Mixin for Class Based Views
 
-
-
-[courses\views.py]
+###[courses\views.py]
 CourseObjectMixin case 1
 
 ```python
@@ -999,7 +944,7 @@ class CourseObjectMixin:
         return obj
 ```
 
-
+<br>
 
 CourseObjectMixin case 2
 
@@ -1019,7 +964,7 @@ class CourseObjectMixin:
         return obj
 ```
 
-
+<br>
 
 CourseDeleteView, CourseUpdateView
 
@@ -1083,6 +1028,7 @@ class CourseUpdateView(CourseObjectMixin, View):
         return render(request, self.template_name, context)
 ```
 
+<br>
 
 CourseView
 
@@ -1099,7 +1045,7 @@ class CourseView(CourseObjectMixin, View):
     #     return render(request, 'about.html', {})
 ```
 
-
+<br>
 
 CourseCreateView, CourseListView: 변경된 점 없음
 
@@ -1132,3 +1078,4 @@ class CourseListView(View):
         return render(request, self.template_name, context)
 ```
 
+<br><br><br>
