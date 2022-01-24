@@ -319,7 +319,8 @@ python manage.py startapp pages
 
 <br>
 
-### [pages 추가]<br><br>[trydjango\trydjango\settings.py]
+### [pages 추가]
+### [trydjango\trydjango\settings.py]
 
 ```python
 INSTALLED_APPS = [
@@ -330,7 +331,8 @@ INSTALLED_APPS = [
 
 <br>
 
-### [pages home 추가]<br><br>[pages/views.py]
+### [pages home 추가]
+### [pages/views.py]
 
 ```python
 def home_view(*args, **kwargs):
@@ -369,7 +371,9 @@ urlpatterns = [
 
 <br>
 
-### [pages contact 추가하기]<br><br>[pages\views.py]
+### [pages contact 추가하기]
+
+#### [pages\views.py]
 
 ```python
 def home_view(*args, **kwargs):
@@ -383,7 +387,7 @@ def contact_view(*args, **kwargs):
 
 <br>
 
-### [urls.py]
+#### [urls.py]
 
 ```python
 from pages.views import home_view, contact_view
@@ -399,7 +403,8 @@ https://satir.tistory.com/184
 
 <br>
 
-### [pages about, contact 추가]<br><br>[pages\views.py]
+### [pages about, contact 추가]
+#### [pages\views.py]
 
 ```python
 def home_view(*args, **kwargs):
@@ -421,7 +426,7 @@ def social_view(*args, **kwargs):
 
 <br>
 
-### [urls.py]
+#### [urls.py]
 
 ```python
 from pages.views import home_view, contact_view, about_view
@@ -439,7 +444,8 @@ https://youtu.be/F5mRW0jo-U4?t=4054
 
 <br>
 
-### [args 확인하기]<br><br>[trydjango\pages\views.py]
+### [args 확인하기]
+#### [trydjango\pages\views.py]
 
 ```python
 def home_view(*args, **kwargs):
@@ -3613,6 +3619,7 @@ class Article(models.Model):
 <br>
 
 ### [blog\urls.py]
+
 int:slug
 
 ```python
@@ -3631,6 +3638,7 @@ django.core.exceptions.FieldError: Cannot resolve keyword 'slug' into field. Cho
 <br><br><br>
 
 ### [blog\urls.py]
+
 int:pk
 
 ```python
@@ -3666,6 +3674,7 @@ Not Found: /blog/2/
 # Class Based Views - CreateView
 
 ### [blog\views.py]
+
 클래스 이름. 상속 클래스. 템플렛 이름만 변경하고 html, urls 작성하기
 
 ```python
@@ -3827,6 +3836,7 @@ urlpatterns = [
 # DeleteView
 
 ### [blog\views.py]
+
 get_success_url 없을 때: [500 Internal Server Error](https://developer.mozilla.org/ko/docs/Web/HTTP/Status/500)
 
 ```python
@@ -3873,6 +3883,7 @@ django.core.exceptions.ImproperlyConfigured: No URL to redirect to. Provide a su
 <br><br><br>
 
 ### [blog\views.py]
+
 get_success_url 있을 때: [200 OK](https://developer.mozilla.org/ko/docs/Web/HTTP/Status/200)
 
 ```python

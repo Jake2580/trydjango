@@ -178,6 +178,7 @@ urlpatterns = [
 # Raw Detail Class Based View
 
 https://youtu.be/F5mRW0jo-U4?t=12437
+
 <br>
 
 ### [courses\models.py]
@@ -262,7 +263,7 @@ urlpatterns = [
 ]
 ```
 
-<br>
+<br><br><br>
 
 ### [courses\views.py]
 
@@ -564,6 +565,7 @@ CourseListView 클래스가 영향을 받지 않도록
 MyListView 클래스 변경하기
 <br><br>
 ex) 주석, 삭제
+
 <br><br><br>
 
 # Raw Create Class Based View
