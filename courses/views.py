@@ -4,6 +4,7 @@ from django.views import View
 from .models import Course
 from .forms import CourseModelForm
 
+
 class CourseObjectMixin:
     model = Course
 
@@ -15,6 +16,7 @@ class CourseObjectMixin:
 
         obj = get_object_or_404(self.model, id=id)  # Course → self.model
         return obj
+
 
 class CourseDeleteView(CourseObjectMixin, View):
     template_name = 'courses/course_delete.html'
@@ -39,12 +41,13 @@ class CourseDeleteView(CourseObjectMixin, View):
             print(f'CourseDeleteView.post: 안돼! {id}번 Course 삭제하지마!')
             # context['object'] = None
             return redirect('/courses/')
-            
+
         return render(request, self.template_name, context)
+
 
 class CourseUpdateView(CourseObjectMixin, View):
     template_name = 'courses/course_update.html'
- 
+
     # GET Method
     def get(self, request, id=None, *args, **kwargs):
         context = dict()
@@ -69,11 +72,12 @@ class CourseUpdateView(CourseObjectMixin, View):
             form = CourseModelForm(request.POST, instance=obj)
             if form.is_valid():
                 form.save()
-            
+
             context['object'] = obj
             context['form'] = form
-            
+
         return render(request, self.template_name, context)
+
 
 class CourseCreateView(View):
     template_name = 'courses/course_create.html'
@@ -87,9 +91,10 @@ class CourseCreateView(View):
         form = CourseModelForm(request.POST)
         if form.is_valid():
             form.save()
-            
+
         context = {'form': form}
         return render(request, self.template_name, context)
+
 
 class CourseListView(View):
     template_name = 'courses/course_list.html'
@@ -101,9 +106,11 @@ class CourseListView(View):
         context = {'object_list': self.get_queryset()}
         return render(request, self.template_name, context)
 
+
 """ class MyListView(CourseListView):
     queryset = Course.objects.filter(id=1)
     pass """
+
 
 # BASE VIEW CLASS = VIEW
 class CourseView(CourseObjectMixin, View):
@@ -116,8 +123,9 @@ class CourseView(CourseObjectMixin, View):
 
     # def post(request, *args, **kwargs):
     #     return render(request, 'about.html', {})
-    
+
     pass
+
 
 """ class CourseView(View):
     template_name = 'about.html'
